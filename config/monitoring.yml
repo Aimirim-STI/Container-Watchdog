@@ -1,0 +1,9 @@
+# Copyright (c) 2017 Aimirim STI.
+
+services:
+
+  orchestrator:
+    container_name: orchestrator
+    watch_files:
+      - ./monitoring.yml
+

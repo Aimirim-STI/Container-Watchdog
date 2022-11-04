@@ -1,4 +1,14 @@
-FROM alpine:latest
-RUN apk add --no-cache bash curl docker-cli
+FROM python:3.12.0a1-alpine3.16
 
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+USER root
+
+ENV CONF_PATH=/home/config/monitoring.yml
+ENV WATCH_FOLDER=/home/config
+
+WORKDIR /home
+
+COPY . /home/
+
+RUN pip install -r requirements.txt
+
+ENTRYPOINT ["python3", "src/main.py"]
