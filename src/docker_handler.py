@@ -130,8 +130,8 @@ class DockerEventHandler(FileSystemEventHandler):
                 if container is not None:
                     # Restarts the requested container
                     try:
-                        container.restart(timeout=10)
                         self.logger.info(f"Sending restart signal to '{container_name}'.")
+                        container.restart(timeout=10)
                         # TODO: Check if container trully restarted
 
                     # Error handling
