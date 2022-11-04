@@ -11,6 +11,7 @@ Copyright (c) 2017 Aimirim STI.\n
 
 # Import system libs
 import os
+import sys
 import yaml
 import docker
 import logging
@@ -120,12 +121,15 @@ class DockerEventHandler(FileSystemEventHandler):
                 
                 # Error handling
                 except docker.errors.NotFound:
-                    self.logger.error(f"No container named '{container_name}' found. Skipping...")
+                    self.logger.error(f"No container named '{container_name}' found. Exiting...")
+                    sys.exit(1)
                 except docker.errors.APIError:
-                    self.logger.warn(f"Unable to connect to docker server. No actions taken for '{container_name}'.")
+                    self.logger.error(f"Unable to connect to docker server. No actions taken for '{container_name}'. Exiting...")
+                    sys.exit(2)
                 except Exception as ex:
-                    self.logger.warn(f"Unable to access container '{container_name}'.")
+                    self.logger.error(f"Unable to access container '{container_name}'. Exiting...")
                     self.logger.error(ex)
+                    sys.exit(3)
                 
                 if container is not None:
                     # Restarts the requested container
@@ -136,9 +140,11 @@ class DockerEventHandler(FileSystemEventHandler):
 
                     # Error handling
                     except docker.errors.APIError:
-                        self.logger.warn(f"Unable to connect to docker server. No actions taken for '{container_name}'.")
+                        self.logger.error(f"Unable to connect to docker server. No actions taken for '{container_name}'. Exiting...")
+                        sys.exit(4)
                     except Exception as ex:
-                        self.logger.warn(f"Unable to restart '{container_name}'.")
+                        self.logger.error(f"Unable to restart '{container_name}'. Exiting...")
                         self.logger.error(ex)
+                        sys.exit(5)
 
     # --------------------
