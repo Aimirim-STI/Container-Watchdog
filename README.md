@@ -25,9 +25,8 @@ With:
     - `/var/run/docker.sock`: Docker socket connection
 
 ## Running the image
-So far the image does not have a program, so to run it once the image is in docker, you will need:
 ```sh
-$ docker run -it --entrypoint=bin/bash -v /var/run/docker.sock:/var/run/docker.sock idc_orchestrator:<tag>
+$ docker run -v /var/run/docker.sock:/var/run/docker.sock -v $PWD/config:/home/config --name orchestrator orchestrator:<tag>
 ```
 With:
 - `<tag>`: as the image version, i.e. `0.2.0`
