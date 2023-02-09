@@ -52,7 +52,7 @@ def observer_launch(observer:Observer=None):
 
     # Initialize the observer
     observer = Observer()
-    observer.schedule(event_handler, os.path.realpath(WATCH_FOLDER), recursive=False)
+    observer.schedule(event_handler, os.path.realpath(WATCH_FOLDER), recursive=True)
     # Lauch threads
     observer.start()
     logging.root.info(f'Orchestrator is Up and Running.')
