@@ -16,7 +16,7 @@ packaging==21.3
     # via docker
 pyparsing==3.0.9
     # via packaging
-pyyaml==6.0
+pyyaml==6.0.1
     # via -r requirements.in
 requests==2.28.1
     # via docker
