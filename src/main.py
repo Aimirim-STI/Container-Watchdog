@@ -6,6 +6,7 @@ Copyright (c) 2017 Aimirim STI.\n
 
 # Import system libs
 import time
+import signal
 import logging
 
 # Import custom libs
@@ -20,6 +21,10 @@ logging.basicConfig(
     datefmt='%Y-%m-%d %H:%M:%S')
 
 observer = observer_launch(None)
+
+# Bind signals to observer stop
+signal.signal(signal.SIGINT, observer.stop)
+signal.signal(signal.SIGTERM, observer.stop)
 
 # Keep the program running
 try:
